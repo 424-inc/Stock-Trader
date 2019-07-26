@@ -2,6 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="Deep Learning"/>
+	<classpathentry kind="src" path="Data Manipulation"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="Resources/libraries/DL4J/aeron-all-1.4.0.jar"/>
 	<classpathentry kind="lib" path="Resources/libraries/DL4J/Agrona-0.5.4.jar"/>
