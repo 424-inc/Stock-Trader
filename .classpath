@@ -18,5 +18,45 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/aopalliance-1.0.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/aopalliance-repackaged-2.5.0-b32.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/commons-io-2.5.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/grizzly-framework-2.3.28.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/grizzly-http-2.3.28.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/grizzly-http-server-2.3.28.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/guava-19.0.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/guice-4.1.0.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/hk2-api-2.5.0-b32.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/hk2-locator-2.5.0-b32.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/hk2-utils-2.5.0-b32.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/httpclient-4.5.3.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/httpcore-4.4.6.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/httpmime-4.5.3.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/jackson-annotations-2.8.0.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/jackson-core-2.8.7.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/jackson-databind-2.8.7.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/jackson-jaxrs-base-2.8.7.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/jackson-jaxrs-json-provider-2.8.7.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/jackson-module-jaxb-annotations-2.8.7.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/javassist-3.20.0-GA.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/javax.annotation-api-1.2.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/javax.inject-1.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/javax.inject-2.5.0-b32.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/javax.ws.rs-api-2.0.1.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/jersey-client-2.25.1.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/jersey-common-2.25.1.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/jersey-container-grizzly2-http-2.25.1.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/jersey-entity-filtering-2.25.1.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/jersey-guava-2.25.1.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/jersey-media-jaxb-2.25.1.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/jersey-media-json-jackson-2.25.1.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/jersey-server-2.25.1.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/json-20160810.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/osgi-resource-locator-1.0.1.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/telegrambots-4.1.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/telegrambots-meta-4.1.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Telegram/validation-api-1.1.0.Final.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
