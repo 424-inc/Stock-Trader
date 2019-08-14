@@ -1,22 +1,69 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.google.common.io.CharSink;
 import com.google.common.io.Files;
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 
 public class Read_And_Write {
 	// Anything that needs to happen on Startup should be added to this method
 	public static void Startup() {
-		File file = new File(Run.basedir);
+		File file = new File(Database.basedir);
 		if(!file.exists()) {
 			file.mkdirs();
 		}
-		File fileLogs = new File(Run.basedir+"/logs");
+		File stockData = new File(Database.basedir+"/Stock Data");
+		if(!stockData.exists()) {
+			stockData.mkdirs();
+		}
+		File fileLogs = new File(Database.basedir+"/logs");
 		if(!fileLogs.exists()) {
 			fileLogs.mkdirs();
+		}
+		Startup_Files.Stock_Names();
+	}
+	static class Startup_Files{
+		public static void Stock_Data_Files() {
+			if(!Database.Stock_Names.contains("----- Stock Name Here -----")) {
+			for(int i=0;i<Database.Stock_Names.size();i++) {
+				File file = new File(Database.basedir+"/Stock Data/"+Database.Stock_Names.get(i));
+				if(!file.exists()) {
+					file.mkdir();
+				}
+			}
+			}else {
+				System.out.println("Change Stock Names.txt");
+				System.exit(0);
+			}
+		}
+		public static void Stock_Names() {
+			File stockNames = new File(Database.basedir+"/Stock Names.txt");
+			if(stockNames.exists()) {
+				@SuppressWarnings("serial")
+				Type token = new TypeToken<ArrayList<String>>(){}.getType();
+		        Gson gson = new Gson();
+		        try {
+					Database.Stock_Names = gson.fromJson(File_Manipulation.ReadFromFile("Stock Names"), token);
+				} catch (JsonSyntaxException e) {
+					e.printStackTrace();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+		        Stock_Data_Files();
+			}else {
+			ArrayList<String> stocks = new ArrayList<String>();
+			stocks.add("----- Stock Name Here -----");
+			stocks.add("----- Stock Name Here -----");
+			File_Manipulation.WriteToFile(File_Manipulation.JSON_Maker(stocks), "Stock Names");
+			System.exit(0);
+			}
 		}
 	}
 	static class File_Manipulation{
@@ -27,7 +74,7 @@ public class Read_And_Write {
 	}
 	// Returns a String value that was written within a text file
 	public static String ReadFromFile(String File_Name) throws FileNotFoundException {
-		File file = new File(Run.basedir+"/"+File_Name+".txt"); 
+		File file = new File(Database.basedir+"/"+File_Name+".txt"); 
 		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(file); 
 		String data = "";
@@ -39,7 +86,7 @@ public class Read_And_Write {
 	}
 	// Writes a String value to a file with a given directory
 	public static void WriteToFile(String data, String File_Name) {
-		File file = new File(Run.basedir+"/"+File_Name+".txt");
+		File file = new File(Database.basedir+"/"+File_Name+".txt");
 	    CharSink sink = Files.asCharSink(file, StandardCharsets.UTF_8);
 	    try {
 	        sink.write(data);
