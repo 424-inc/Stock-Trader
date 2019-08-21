@@ -34,8 +34,12 @@ public class Read_And_Write {
 			if(!Database.Stock_Names.contains("----- Stock Name Here -----")) {
 			for(int i=0;i<Database.Stock_Names.size();i++) {
 				File file = new File(Database.basedir+"/Stock Data/"+Database.Stock_Names.get(i));
+				File dataFile = new File(Database.basedir+"/Stock Data/"+Database.Stock_Names.get(i)+"/Data");
 				if(!file.exists()) {
 					file.mkdir();
+				}
+				if(!dataFile.exists()) {
+					dataFile.mkdir();
 				}
 			}
 			}else {
