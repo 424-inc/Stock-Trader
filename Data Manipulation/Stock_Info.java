@@ -13,10 +13,9 @@ import yahoofinance.histquotes.Interval;
 import yahoofinance.quotes.stock.StockQuote;
 
 public class Stock_Info {
-public static BigDecimal Current_Price(String Stock) throws IOException {
+public static double Current_Price(String Stock) throws IOException {
 	Stock stock = YahooFinance.get(Stock);
-	 
-	return stock.getQuote().getPrice();
+	return stock.getQuote().getPrice().doubleValue();
 }
 public static Map<String, Stock> Current_Price_Array(ArrayList<String> symbols){
 	String[] sym = Database.Stock_Names.toArray(new String[0]);

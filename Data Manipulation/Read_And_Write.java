@@ -23,13 +23,37 @@ public class Read_And_Write {
 		if(!stockData.exists()) {
 			stockData.mkdirs();
 		}
+		File fileSecurity = new File(Database.basedir+"/Security");
+		if(!fileSecurity.exists()) {
+			fileSecurity.mkdirs();
+		}
 		File fileLogs = new File(Database.basedir+"/logs");
 		if(!fileLogs.exists()) {
 			fileLogs.mkdirs();
 		}
 		Startup_Files.Stock_Names();
+		Startup_Files.Telegram_Credentials();
 	}
 	static class Startup_Files{
+		public static void Telegram_Credentials() {
+			File TC = new File(Database.basedir+"/Security/Telegram_Credentials.txt");
+			if(TC.exists()) {
+				@SuppressWarnings("serial")
+				Type token = new TypeToken<Database.Telegram>(){}.getType();
+			     Gson gson = new Gson();
+			     try {
+					Database.telegram=gson.fromJson(File_Manipulation.ReadFromFile("Security/Telegram_Credentials"), token);
+				} catch (JsonSyntaxException e) {
+					e.printStackTrace();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+			}else {
+				Database.Telegram e = null;
+				File_Manipulation.WriteToFile(File_Manipulation.JSON_Maker(e),"Security/Telegram_Credentials");
+				System.exit(0);
+			}
+		}
 		public static void Stock_Data_Files() {
 			if(!Database.Stock_Names.contains("----- Stock Name Here -----")) {
 			for(int i=0;i<Database.Stock_Names.size();i++) {
