@@ -10,6 +10,7 @@
 	<classpathentry kind="src" path="Data Manipulation"/>
 	<classpathentry kind="src" path="Trading"/>
 	<classpathentry kind="src" path="Telegram"/>
+	<classpathentry kind="src" path="Charting"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
@@ -63,5 +64,7 @@
 	<classpathentry kind="lib" path="Resources/libraries/Yahoo Finance/YahooFinanceAPI-3.15.0.jar"/>
 	<classpathentry kind="lib" path="Resources/libraries/Yahoo Finance/slf4j-api-1.7.28.jar"/>
 	<classpathentry kind="lib" path="Resources/libraries/Yahoo Finance/slf4j-simple-1.7.28.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/XChart/xchart-3.5.0.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/XChart/xchart-demo-3.5.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

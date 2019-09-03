@@ -26,7 +26,7 @@ public class Databasing {
 						file.mkdir();
 					}
 					try {
-						Thread.sleep(1000*60);
+						Thread.sleep(Database.timeInterval);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -37,17 +37,16 @@ public class Databasing {
 								dataMap.get(Database.Stock_Names.get(ie)).add(stocks.get(Database.Stock_Names.get(ie)));
 							}
 							try {
-								Thread.sleep(1000*60);
+								Thread.sleep(Database.timeInterval);
 							} catch (InterruptedException e) {
 								e.printStackTrace();
 							}
 						}
 						Date filedate = new Date();
 						for(int i=0;i<Database.Stock_Names.size();i++) {
-							
 							Read_And_Write.File_Manipulation.WriteToFile(Read_And_Write.File_Manipulation
 									.JSON_Maker(dataMap.get(Database.Stock_Names.get(i)))
-									,Database.basedir+"/Stock Data/"+Database.Stock_Names.get(i)+"/Data/"+date+"/"+filedate.getTime());
+									,"/Stock Data/"+Database.Stock_Names.get(i)+"/Data/"+date.getTime()+"/"+filedate.getTime());
 									
 						}
 					}
