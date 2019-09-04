@@ -16,22 +16,20 @@ public class Databasing {
 			Thread thread = new Thread() {
 				public void run() {
 					Date date = new Date();
-					HashMap<String, ArrayList<Stock>> dataMap = new HashMap<String, ArrayList<Stock>>();
-					Map<String, Stock> prestocks = Stock_Info.Current_Price_Array(Database.Stock_Names);
-					for(int i=0;i<Database.Stock_Names.size();i++) {
-						ArrayList<Stock> list = new ArrayList<Stock>();
-						list.add(prestocks.get(Database.Stock_Names.get(i)));
-						dataMap.put(Database.Stock_Names.get(i), list);
-						File file = new File(Database.basedir+"/Stock Data/"+Database.Stock_Names.get(i)+"/Data/"+date.getTime());
-						file.mkdir();
-					}
-					try {
-						Thread.sleep(Database.timeInterval);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
 					while(recording) {
-						for(int i=0;i<59;i++) {
+						HashMap<String, ArrayList<Stock>> dataMap = new HashMap<String, ArrayList<Stock>>();
+						Map<String, Stock> prestocks = Stock_Info.Current_Price_Array(Database.Stock_Names);
+						for(int i=0;i<Database.Stock_Names.size();i++) {
+							ArrayList<Stock> list = new ArrayList<Stock>();
+							list.add(prestocks.get(Database.Stock_Names.get(i)));
+							dataMap.put(Database.Stock_Names.get(i), list);
+						}
+						try {
+							Thread.sleep(Database.timeInterval);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						for(int i=0;i<Database.stockDataFileAmount-1;i++) {
 							Map<String, Stock> stocks = Stock_Info.Current_Price_Array(Database.Stock_Names);
 							for(int ie=0;ie<Database.Stock_Names.size();ie++) {
 								dataMap.get(Database.Stock_Names.get(ie)).add(stocks.get(Database.Stock_Names.get(ie)));
@@ -40,6 +38,12 @@ public class Databasing {
 								Thread.sleep(Database.timeInterval);
 							} catch (InterruptedException e) {
 								e.printStackTrace();
+							}
+						}
+						for(int i=0;i<Database.Stock_Names.size();i++) {
+							File file = new File(Database.basedir+"/Stock Data/"+Database.Stock_Names.get(i)+"/Data/"+date.getTime());
+							if(!file.exists()) {
+							file.mkdir();
 							}
 						}
 						Date filedate = new Date();

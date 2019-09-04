@@ -7,6 +7,12 @@ import org.knowm.xchart.SwingWrapper;
 import org.knowm.xchart.XYChart;
 
 public class Line_Graph {
+	static class Scheme{
+		public static Color line = new Color(225,0,56);
+		public static Color backround = new Color(0,0,0);
+		public static Color text = new Color(240,200,8);
+		public static Color random = new Color(234,99,140);
+	}
 	static class Viewer{
 		
 		private static ArrayList<Integer> x = new ArrayList<Integer>();
@@ -16,8 +22,13 @@ public class Line_Graph {
 		private static SwingWrapper<XYChart> sw;
 		
 		public static void update(Double update) {
+			if(x.size()==1200*Database.chartTime) {
+				x.remove(0);
+				x.add(x.size());
+			}else {
 				x.add(x.size());
 				y.add(update);
+			}
 				chart.updateXYSeries("Current", x, y,null);
 				sw.repaintChart();
 		}
@@ -26,12 +37,13 @@ public class Line_Graph {
 			y.add(initial);
 			
 			chart = QuickChart.getChart("Stock", "Time", "Price", "Current", x, y);
-			chart.getSeriesMap().get("Current").setLineColor(Color.RED);
-			chart.getStyler().setPlotBorderColor(Color.BLUE);
-			chart.getStyler().setPlotBackgroundColor(Color.BLACK);
+			chart.getSeriesMap().get("Current").setLineColor(Scheme.line);
+			chart.getStyler().setPlotBorderColor(Scheme.random);
+			chart.getStyler().setPlotBackgroundColor(Scheme.backround);
 			chart.getStyler().setPlotGridLinesVisible(false);
+			chart.getStyler().setChartBackgroundColor(Scheme.backround);
+			chart.getStyler().setChartFontColor(Scheme.text);
 			sw = new SwingWrapper<XYChart>(chart);
-			//sw.getXChartPanel().setBackground(Color.BLACK);
 			sw.displayChart();
 			}
 	}
