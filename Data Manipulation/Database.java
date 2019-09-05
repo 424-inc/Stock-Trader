@@ -6,12 +6,12 @@ import yahoofinance.Stock;
 public class Database {
 	// Data collecting
 		public static long timeInterval = 3000;
-	// 200 = 10 mins in each file.. scans every 3 seconds
+	// 200 = 10 mins in each file.. scans every 3 second
 		public static int stockDataFileAmount = 200;
 	
 	//Graphing
-		//Hours
-		public static int chartTime=1;
+		//Seconds
+		public static int chartTime=60*60;
 	
 	public static String basedir = System.getProperty("user.home")+"/Desktop/StockTrader";
 	public static ArrayList<String> Stock_Names;

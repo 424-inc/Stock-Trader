@@ -22,9 +22,9 @@ public class Line_Graph {
 		private static SwingWrapper<XYChart> sw;
 		
 		public static void update(Double update) {
-			if(x.size()==1200*Database.chartTime) {
-				x.remove(0);
-				x.add(x.size());
+			if(x.size()>Database.chartTime-1) {
+				y.remove(0);
+				y.add(update);
 			}else {
 				x.add(x.size());
 				y.add(update);

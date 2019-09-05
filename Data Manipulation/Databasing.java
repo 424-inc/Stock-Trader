@@ -17,6 +17,7 @@ public class Databasing {
 				public void run() {
 					Date date = new Date();
 					while(recording) {
+						long AstartTime = System.nanoTime();
 						HashMap<String, ArrayList<Stock>> dataMap = new HashMap<String, ArrayList<Stock>>();
 						Map<String, Stock> prestocks = Stock_Info.Current_Price_Array(Database.Stock_Names);
 						for(int i=0;i<Database.Stock_Names.size();i++) {
@@ -24,20 +25,42 @@ public class Databasing {
 							list.add(prestocks.get(Database.Stock_Names.get(i)));
 							dataMap.put(Database.Stock_Names.get(i), list);
 						}
-						try {
-							Thread.sleep(Database.timeInterval);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
+							long AendTime = System.nanoTime();
+							long AtimeElapsed = (AendTime - AstartTime)/1000000;
+							if(AtimeElapsed>Database.timeInterval) {
+								try {
+									Thread.sleep(AtimeElapsed-Database.timeInterval);
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}
+							}else {
+								try {
+									Thread.sleep(Database.timeInterval-AtimeElapsed);
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}
+							}
 						for(int i=0;i<Database.stockDataFileAmount-1;i++) {
+							
+							long startTime = System.nanoTime();
 							Map<String, Stock> stocks = Stock_Info.Current_Price_Array(Database.Stock_Names);
 							for(int ie=0;ie<Database.Stock_Names.size();ie++) {
 								dataMap.get(Database.Stock_Names.get(ie)).add(stocks.get(Database.Stock_Names.get(ie)));
 							}
-							try {
-								Thread.sleep(Database.timeInterval);
-							} catch (InterruptedException e) {
-								e.printStackTrace();
+							long endTime = System.nanoTime();
+							long timeElapsed = (endTime - startTime)/1000000;
+							if(timeElapsed>Database.timeInterval) {
+								try {
+									Thread.sleep(timeElapsed-Database.timeInterval);
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}
+							}else {
+								try {
+									Thread.sleep(Database.timeInterval-timeElapsed);
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}
 							}
 						}
 						for(int i=0;i<Database.Stock_Names.size();i++) {
