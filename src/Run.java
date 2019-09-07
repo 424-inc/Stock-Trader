@@ -4,6 +4,8 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
 
 public class Run {
 	public static void main(String[] args){
+		Brain.build();
+		/*
 		Read_And_Write.Startup();
 		Databasing.Recording.Start();
 		
@@ -15,7 +17,7 @@ public class Run {
 		} catch (TelegramApiRequestException e) {
 			e.printStackTrace();
 		} 
-		
+		*/
 	}
 
 }

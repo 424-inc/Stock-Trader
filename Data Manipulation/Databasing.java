@@ -11,11 +11,17 @@ public class Databasing {
 		public static void Stop() {
 			recording=false;
 		}
+		public static void Retry() {
+			recording=false;
+			System.out.println("----- Re-Booting Data-Mining System -----");
+			Start();
+		}
 		public static void Start(){
 			recording=true;
 			Thread thread = new Thread() {
 				public void run() {
 					Date date = new Date();
+					try {
 					while(recording) {
 						long AstartTime = System.nanoTime();
 						HashMap<String, ArrayList<Stock>> dataMap = new HashMap<String, ArrayList<Stock>>();
@@ -76,6 +82,9 @@ public class Databasing {
 									,"/Stock Data/"+Database.Stock_Names.get(i)+"/Data/"+date.getTime()+"/"+filedate.getTime());
 									
 						}
+					}
+					}catch(Exception e) {
+						Retry();
 					}
 				}
 			};
