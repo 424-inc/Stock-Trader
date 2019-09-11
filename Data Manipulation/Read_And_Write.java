@@ -12,12 +12,30 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 
+import yahoofinance.Stock;
+
 public class Read_And_Write {
 	// Anything that needs to happen on Startup should be added to this method
 	public static void Startup() {
 		File file = new File(Database.basedir);
 		if(!file.exists()) {
 			file.mkdirs();
+		}
+		File fileAI1 = new File(Database.basedir+"/AI/Training Data/Test/Lables");
+		if(!fileAI1.exists()) {
+			fileAI1.mkdirs();
+		}
+		File fileAI2 = new File(Database.basedir+"/AI/Training Data/Test/Features");
+		if(!fileAI2.exists()) {
+			fileAI2.mkdirs();
+		}
+		File fileAI3 = new File(Database.basedir+"/AI/Training Data/Train/Lables");
+		if(!fileAI3.exists()) {
+			fileAI3.mkdirs();
+		}
+		File fileAI4 = new File(Database.basedir+"/AI/Training Data/Train/Features");
+		if(!fileAI4.exists()) {
+			fileAI4.mkdirs();
 		}
 		File stockData = new File(Database.basedir+"/Stock Data");
 		if(!stockData.exists()) {
@@ -95,6 +113,22 @@ public class Read_And_Write {
 		}
 	}
 	static class File_Manipulation{
+		static class AI{
+			public static ArrayList<Double> ReadStockFile(String Directory) {
+				ArrayList<Double> ret = null;
+				@SuppressWarnings("serial")
+				Type token = new TypeToken<ArrayList<Double>>(){}.getType();
+		        Gson gson = new Gson();
+				try {
+					ret = gson.fromJson(File_Manipulation.ReadFromFile(Directory), token);
+				} catch (JsonSyntaxException e) {
+					e.printStackTrace();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				};
+				return ret;
+			}
+		}
 	// Turns any object into a JSON object that can be written to a text file
 	public static String JSON_Maker(Object data) {
 		String gson = new GsonBuilder().setPrettyPrinting().create().toJson(data);

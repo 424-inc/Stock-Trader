@@ -4,11 +4,12 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
 
 public class Run {
 	public static void main(String[] args){
-		Brain.build();
-		/*
 		Read_And_Write.Startup();
-		Databasing.Recording.Start();
+		//Brain.startup();
 		
+		Databasing.Recording.Start();
+		//Brain.Training.load();
+		/*
 		ApiContextInitializer.init();
 		TelegramBotsApi botsApi = new TelegramBotsApi();
         try {

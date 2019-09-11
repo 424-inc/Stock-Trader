@@ -356,5 +356,6 @@
 	<classpathentry kind="lib" path="Resources/libraries/DL4J/xml-apis-1.4.01.jar"/>
 	<classpathentry kind="lib" path="Resources/libraries/DL4J/xmlenc-0.52.jar"/>
 	<classpathentry kind="lib" path="Resources/libraries/DL4J/zookeeper-3.4.6.jar"/>
+	<classpathentry kind="lib" path="Resources/libraries/Apache/commons-csv-1.6.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
