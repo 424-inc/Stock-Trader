@@ -52,6 +52,23 @@ public class Read_And_Write {
 		Startup_Files.Stock_Names();
 		Startup_Files.Telegram_Credentials();
 	}
+	static class AI{
+		public static ArrayList<Double> Read_Array(String Directory){
+			Type token = new TypeToken<ArrayList<Double>>(){}.getType();
+		     Gson gson = new Gson();
+			try {
+				ArrayList<Double> ret=gson.fromJson(File_Manipulation.ReadFromFile(Directory), token);
+				return ret;
+			} catch (JsonSyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			};
+			return null;
+		}
+	}
 	static class Startup_Files{
 		public static void Telegram_Credentials() {
 			File TC = new File(Database.basedir+"/Security/Telegram_Credentials.txt");

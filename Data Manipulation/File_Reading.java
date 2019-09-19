@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 public class File_Reading {
 	public static ArrayList<String> FilesInDirectory(String Directory) {
 		ArrayList<String> result = null;
-		try (Stream<Path> walk = Files.walk(Paths.get(Database.basedir+Directory))) {
+		try (Stream<Path> walk = Files.walk(Paths.get(Directory))) {
 
 			result = (ArrayList<String>) walk.filter(Files::isRegularFile)
 					.map(x -> x.toString()).collect(Collectors.toList());
@@ -19,16 +19,16 @@ public class File_Reading {
 		}
 		return result;
 	}
-	public static ArrayList<String> FoldersInDirectoriy(String Directory){
+	public static ArrayList<String> FoldersInDirectory(String Directory){
 		ArrayList<String> result = null;
-		try (Stream<Path> walk = Files.walk(Paths.get(Database.basedir+Directory))) {
-
+		try (Stream<Path> walk = Files.walk(Paths.get(Directory))) {
 			result = (ArrayList<String>) walk.filter(Files::isDirectory)
 					.map(x -> x.toString()).collect(Collectors.toList());
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		result.remove(0);
 		return result;
 	}
 }

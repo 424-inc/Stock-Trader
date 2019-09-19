@@ -7,8 +7,8 @@ public class Run {
 		Read_And_Write.Startup();
 		//Brain.startup();
 		
-		Databasing.Recording.Start();
-		//Brain.Training.load();
+		//Databasing.Recording.Start();
+		Brain.Training.load();
 		/*
 		ApiContextInitializer.init();
 		TelegramBotsApi botsApi = new TelegramBotsApi();

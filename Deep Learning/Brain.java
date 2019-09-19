@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -16,6 +17,8 @@ import org.nd4j.linalg.activations.Activation;
 import org.nd4j.linalg.learning.config.RmsProp;
 import org.nd4j.linalg.lossfunctions.LossFunctions.LossFunction;
 
+import com.sun.xml.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+
 import yahoofinance.Stock;
 
 public class Brain {
@@ -23,6 +26,7 @@ public class Brain {
 	private static int in_out_size=20;
 	private static int hidden_layer_count =5;
 	private static int growth_Rate=2;
+	private static double percent_training_data=75; // percent out of 100
 	public static void startup() {
 		File file = new File(Database.basedir+"/AI/Net.txt");
 		if(file.exists()) {
@@ -114,13 +118,78 @@ public class Brain {
 	}
 	static class Training{
 		public static void load() {
-			ArrayList<String> dataDirectories = File_Reading.FilesInDirectory("/Stock Data/BTC-USD");
+			ArrayList<String> folders = File_Reading.FoldersInDirectory(Database.basedir+"/Stock Data/BTC-USD/Data");
 			ArrayList<ArrayList<Double>> stocks = new ArrayList<ArrayList<Double>>();
-			for(int i=0;i<dataDirectories.size();i++) {
-				String dir = dataDirectories.get(i).replace(Database.basedir+"/", "").replace(".txt", "");
-				stocks.add(Read_And_Write.File_Manipulation.AI.ReadStockFile(dir));
+			//loading all data into arraylist
+			for(int i=0;i<folders.size();i++) {
+				String dir1 = folders.get(i);
+				ArrayList<String> files = File_Reading.FilesInDirectory(dir1);
+				ArrayList<Double> batch = new ArrayList<Double>();
+				for(int ie=0;ie<files.size();ie++) {
+					String dir = files.get(ie).replace(Database.basedir, "").replace(".txt", "");
+					if(!dir.contains("DS_Store")) {
+						ArrayList<Double> minibatch = Read_And_Write.AI.Read_Array(dir);
+						batch.addAll(minibatch);
+					}
+					//System.out.println(dir);
+				}
+				//System.out.println("---\n---");
+				stocks.add(batch);
 			}
-			System.out.println(stocks);
+			//placing arraylist into CSV files
+			double percent =percent_training_data/100;
+			int trainingAmount = (int) (percent*stocks.size());
+			int testingAmount = (int) (stocks.size()-trainingAmount);
+			System.out.println(trainingAmount+"   "+testingAmount+" = "+(testingAmount+trainingAmount));
+			//Training Data
+			for(int i=0;i<trainingAmount;i++) {
+				ArrayList<Double> data = stocks.get(i);
+				ArrayList<ArrayList<Double>> minidata = new ArrayList<ArrayList<Double>>();
+				for(int ie=0;ie<data.size();ie+=20) {
+					ArrayList<Double> minidata2 = new ArrayList<Double>();
+					for(int iee=ie;iee<ie+20;iee++) {
+						minidata2.add(data.get(iee));
+					}
+					minidata.add(minidata2);
+				}
+				CSV.MakeCSV("Train/Lables",Integer.toString(i), minidata);
+				ArrayList<ArrayList<Double>> data2 = new ArrayList<ArrayList<Double>>();  
+				ArrayList<Double> data3 = new ArrayList<Double>();  
+				data3.addAll(minidata.get(minidata.size()-1));
+				data2.add(data3);
+				CSV.MakeCSV("Train/Features", Integer.toString(i), data2);
+				
+			}
+			for(int i=trainingAmount;i<stocks.size();i++) {
+				ArrayList<Double> data = stocks.get(i);
+				ArrayList<ArrayList<Double>> minidata = new ArrayList<ArrayList<Double>>();
+				for(int ie=0;ie<data.size();ie+=20) {
+					ArrayList<Double> minidata2 = new ArrayList<Double>();
+					for(int iee=ie;iee<ie+20;iee++) {
+						minidata2.add(data.get(iee));
+					}
+					minidata.add(minidata2);
+				}
+				CSV.MakeCSV("Test/Lables",Integer.toString(i-trainingAmount), minidata);
+				ArrayList<ArrayList<Double>> data2 = new ArrayList<ArrayList<Double>>();  
+				ArrayList<Double> data3 = new ArrayList<Double>();  
+				data3.addAll(minidata.get(minidata.size()-1));
+				data2.add(data3);
+				CSV.MakeCSV("Test/Features", Integer.toString(i-trainingAmount), data2);
+				
+			}
+			/*
+			for(int i=trainingAmount;i<stocks.size();i++) {
+				ArrayList<Double> data = stocks.get(i);
+				data.remove(data.size()-1);
+				CSV.MakeCSV("Test/Lables",Integer.toString(i-trainingAmount), data);
+				ArrayList<Double> data2 = new ArrayList<Double>();
+				
+				data2.add(stocks.get(i).remove(stocks.get(i).size()-1));
+				CSV.MakeCSV("Test/Features", Integer.toString(i-trainingAmount), data2);
+				
+			}
+			*/
 		}
 		public static void train() {
 			
