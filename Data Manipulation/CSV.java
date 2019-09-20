@@ -15,7 +15,7 @@ public class CSV {
 		}
 	}
 	private static void GenerateCSV(String directory,String Name, ArrayList<ArrayList<Double>> Data) throws IOException{
-		BufferedWriter writer = Files.newBufferedWriter(Paths.get(Database.basedir+"/AI/Training Data/"+directory+"/"+Name+".csv"));
+		BufferedWriter writer = Files.newBufferedWriter(Paths.get(Database.basedir+"/AI/TrainingData/"+directory+"/"+Name+".csv"));
 		@SuppressWarnings("resource")
 		CSVPrinter csv = new CSVPrinter(writer, CSVFormat.DEFAULT.withSkipHeaderRecord());
 		for(int i=0;i<Data.size();i++) {

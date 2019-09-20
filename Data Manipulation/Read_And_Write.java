@@ -21,19 +21,19 @@ public class Read_And_Write {
 		if(!file.exists()) {
 			file.mkdirs();
 		}
-		File fileAI1 = new File(Database.basedir+"/AI/Training Data/Test/Lables");
+		File fileAI1 = new File(Database.basedir+"/AI/TrainingData/Test/Labels");
 		if(!fileAI1.exists()) {
 			fileAI1.mkdirs();
 		}
-		File fileAI2 = new File(Database.basedir+"/AI/Training Data/Test/Features");
+		File fileAI2 = new File(Database.basedir+"/AI/TrainingData/Test/Features");
 		if(!fileAI2.exists()) {
 			fileAI2.mkdirs();
 		}
-		File fileAI3 = new File(Database.basedir+"/AI/Training Data/Train/Lables");
+		File fileAI3 = new File(Database.basedir+"/AI/TrainingData/Train/Labels");
 		if(!fileAI3.exists()) {
 			fileAI3.mkdirs();
 		}
-		File fileAI4 = new File(Database.basedir+"/AI/Training Data/Train/Features");
+		File fileAI4 = new File(Database.basedir+"/AI/TrainingData/Train/Features");
 		if(!fileAI4.exists()) {
 			fileAI4.mkdirs();
 		}
